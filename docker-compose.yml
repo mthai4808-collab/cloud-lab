@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # CÂU 81 & 83: Khai báo Backend Service và cấu hình Port
+  backend:
+    build: ./mern-demo          # Trỏ vào thư mục chứa code backend
+    container_name: compose-backend
+    ports:
+      - "5000:5000"             # Ánh xạ port 5000
+    environment:
+      # CÂU 85: Cấu hình biến môi trường kết nối database
+      - MONGODB_URI=mongodb+srv://mthai4808_db_user:Mthai123456@cluster0.tsmlpgo.mongodb.net/?appName=Cluster0
+
+  # CÂU 82 & 84: Khai báo Frontend Service và cấu hình Port
+  frontend:
+    build: ./client             # Trỏ vào thư mục chứa code frontend (React/Vite)
+    container_name: compose-frontend
+    ports:
+      - "3000:80"               # Ánh xạ port 3000 ra ngoài
+    depends_on:
+      - backend                 # Yêu cầu Backend phải chạy lên trước Frontend
