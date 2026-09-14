@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    image: mthai4808/mern-frontend:2.0
+    container_name: hub-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb+srv://mthai4808_db_user:Mthai123456@cluster0.tsmlpgo.mongodb.net/?appName=Cluster0
+
+  frontend:
+    image: mthai4808/mern-frontend:1.0
+    container_name: hub-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
