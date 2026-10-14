@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = (
-  import.meta.env.VITE_API_URL || 'http://localhost:5000'
-).replace(/\/+$/, '');
+// Sử dụng đường dẫn tương đối để Nginx Reverse Proxy tự động điều hướng /api/
+const API_URL = '';
 
 const EMPTY_FORM = {
   studentId: '',
@@ -159,8 +158,9 @@ function App() {
         fontFamily: 'Arial',
       }}
     >
-      <h1>🎓 Quản lý Sinh Viên</h1>
-
+     <h1 style={{ fontSize: '26px', lineHeight: '1.4', marginBottom: '20px' }}>
+        🎓 Quản lý Sinh Viên - Bản 2.0 (CI/CD)
+      </h1>
       {error && (
         <p
           role="alert"

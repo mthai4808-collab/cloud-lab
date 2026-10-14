@@ -28,6 +28,23 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model('Student', studentSchema);
 
+// Trang chủ Backend (Tránh lỗi Cannot GET /)
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'MERN Backend API is running successfully!',
+        endpoints: ['/api/students', '/api/hello', '/health']
+    });
+});
+
+// Endpoint kiểm tra sức khỏe phục vụ Rolling Updates (Phần 4 - Câu 44)
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'UP',
+        timestamp: new Date(),
+        uptime: process.uptime()
+    });
+});
+
 // Kiểm tra backend
 app.get('/api/hello', (req, res) => {
     res.json({

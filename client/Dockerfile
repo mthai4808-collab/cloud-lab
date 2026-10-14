@@ -8,16 +8,15 @@ RUN npm ci
 
 COPY . .
 
-# Nhận URL backend khi build image
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
-
 RUN npm run build
 
 # Phục vụ giao diện bằng Nginx
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy file cấu hình Nginx Reverse Proxy để định tuyến /api/ sang Backend
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
